@@ -1,6 +1,9 @@
 bin/
 obj/
+<<<<<<< HEAD
 .idea/
 .vs/
 *.user
 *.suo
+=======
+>>>>>>> 71c702bce49035494bf6fb92221dc1a6e98788b6

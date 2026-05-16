@@ -3,15 +3,16 @@ namespace Model.Core.Abstract;
 
 public abstract partial class Establishment
 {
-    protected Guid _id;
+    protected int _id;
     protected string _name;
     protected string _address;
     protected string _description;
     protected Menu _menu;
     protected bool _isOpen;
     protected double _rating;
+    protected static int _nextId = 200001;
 
-    public Guid ID => _id;
+    public int ID => _id;
     public string Name => _name;
     public string Address => _address;
     public string Description => _description;
@@ -21,13 +22,13 @@ public abstract partial class Establishment
 
     protected Establishment()
     {
-        _id = Guid.NewGuid();
         _name = string.Empty;
         _address = string.Empty;
         _description = string.Empty;
         _menu = new Menu();
         _isOpen = true;
         _rating = 0;
+        _id = _nextId++;
     }
 
     protected Establishment(string name, string address, string description, Menu menu, double rating)
@@ -51,14 +52,14 @@ public abstract partial class Establishment
         {
             throw new ArgumentException("Рейтинг должен быть от 0 до 5.");
         }
-
-        _id = Guid.NewGuid();
+        
         _name = name;
         _address = address;
         _description = description;
         _menu = menu ?? throw new ArgumentNullException(nameof(menu));
         _isOpen = true;
         _rating = rating;
+        _id = _nextId++;
     }
 
     public abstract string GetEstablishmentType();

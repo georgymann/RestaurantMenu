@@ -99,7 +99,7 @@ public abstract class Dish
         _description = newDescription;
     }
     
-    public void ChangeCaфtegory(string newCategory)
+    public void ChangeCategory(string newCategory)
     {
         if (string.IsNullOrWhiteSpace(newCategory))
         {

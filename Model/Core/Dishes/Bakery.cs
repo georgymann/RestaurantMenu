@@ -4,11 +4,11 @@ using Model.Core.Abstract;
 
 public class Bakery : Dish
 {
-    public int Weight { get; set; }
-    public int Calories { get; set; }
-    public bool IsSweet { get; set; }
-    public bool IsFresh { get; set; }
-    public bool IsVegan { get; set; }
+    public int Weight { get; private set; }
+    public int Calories { get; private set; }
+    public bool IsSweet { get; private set; }
+    public bool IsFresh { get; private set; }
+    public bool IsVegan { get; private set; }
 
     public Bakery(
         string name,
@@ -21,6 +21,8 @@ public class Bakery : Dish
         bool isVegan)
         : base(name, price, description, "Bakery")
     {
+        ValidateWeight(weight);
+        ValidateCalories(calories);
         Weight = weight;
         Calories = calories;
         IsSweet = isSweet;

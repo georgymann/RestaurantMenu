@@ -5,10 +5,10 @@ using Model.Core.Menus;
 
 public class Cafe : Establishment
 {
-    public bool HasBusinessLunch { get; set; }
-    public double AverageCheck { get; set; }
-    public bool HasDelivery { get; set; }
-    public bool HasOutdoorSeating { get; set; }
+    public bool HasBusinessLunch { get; private set; }
+    public double AverageCheck { get; private set; }
+    public bool HasDelivery { get; private set; }
+    public bool HasOutdoorSeating { get; private set; }
 
     public Cafe(
         string name,
@@ -22,6 +22,8 @@ public class Cafe : Establishment
         bool hasOutdoorSeating)
         : base(name, address, description, menu, rating)
     {
+        if (averageCheck < 0)
+            throw new ArgumentException("Средний чек не может быть отрицательным.");
         HasBusinessLunch = hasBusinessLunch;
         AverageCheck = averageCheck;
         HasDelivery = hasDelivery;

@@ -117,4 +117,36 @@ public abstract class Dish
     {
         _isAvailable = false;
     }
+    
+    protected void ValidateWeight(int weight)
+    {
+        if (weight < 0)
+        {
+            throw new ArgumentException("Вес не может быть отрицательным.");
+        }
+    }
+
+    protected void ValidateVolume(double volume)
+    {
+        if (volume < 0)
+        {
+            throw new ArgumentException("Объем не может быть отрицательным.");
+        }
+    }
+
+    protected void ValidateCalories(int calories)
+    {
+        if (calories < 0)
+        {
+            throw new ArgumentException("Калории не могут быть отрицательными.");
+        }
+    }
+
+    protected void ValidateSpiceLevel(int spiceLevel)
+    {
+        if (spiceLevel < 0 || spiceLevel > 10)
+        {
+            throw new ArgumentException("Острота должна быть от 0 до 10.");
+        }
+    }
 }

@@ -4,11 +4,11 @@ using Model.Core.Abstract;
 
 public class Coffee : Dish
 {
-    public double Volume { get; set; }
-    public bool IsHot { get; set; }
-    public bool HasMilk { get; set; }
-    public int CaffeineLevel { get; set; }
-    public int Calories { get; set; }
+    public double Volume { get; private set; }
+    public bool IsHot { get; private set; }
+    public bool HasMilk { get; private set; }
+    public int CaffeineLevel { get; private set; }
+    public int Calories { get; private set; }
 
     public Coffee(
         string name,
@@ -21,6 +21,12 @@ public class Coffee : Dish
         int calories)
         : base(name, price, description, "Coffee")
     {
+        ValidateVolume(volume);
+        ValidateCalories(calories);
+        if (caffeineLevel < 0 || caffeineLevel > 10)
+        {
+            throw new ArgumentException("Уровень кофеина должен быть от 0 до 10.");
+        }
         Volume = volume;
         IsHot = isHot;
         HasMilk = hasMilk;

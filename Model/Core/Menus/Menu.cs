@@ -4,12 +4,10 @@ namespace Model.Core.Menus;
 
 public partial class Menu : IMenu
 {
-    protected Guid _id;
     protected string _name;
     protected string _description;
     protected List<Dish> _dishes;
-
-    public Guid ID => _id;
+    
     public string Name => _name;
     public string Description => _description;
     public Dish[] Dishes => _dishes.ToArray();
@@ -18,7 +16,6 @@ public partial class Menu : IMenu
 
     public Menu()
     {
-        _id = Guid.NewGuid();
         _name = "Основное меню";
         _description = "Меню заведения";
         _dishes = new List<Dish>();
@@ -35,8 +32,7 @@ public partial class Menu : IMenu
         {
             throw new ArgumentException("Описание меню не может быть пустым.");
         }
-
-        _id = Guid.NewGuid();
+        
         _name = name;
         _description = description;
         _dishes = new List<Dish>();

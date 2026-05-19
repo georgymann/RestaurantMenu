@@ -4,11 +4,11 @@ using Model.Core.Abstract;
 
 public class Soup : Dish
 {
-    public int Volume { get; set; }
-    public bool IsHot { get; set; }
-    public bool IsVegan { get; set; }
-    public int SpiceLevel { get; set; }
-
+    public int Volume { get; private set; }
+    public bool IsHot { get; private set; }
+    public bool IsVegan { get; private set; }
+    public int SpiceLevel { get; private set; }
+    
     public Soup(
         string name,
         double price,
@@ -19,6 +19,8 @@ public class Soup : Dish
         int spiceLevel)
         : base(name, price, description, "Soups")
     {
+        ValidateVolume(volume);
+        ValidateSpiceLevel(spiceLevel);
         Volume = volume;
         IsHot = isHot;
         IsVegan = isVegan;

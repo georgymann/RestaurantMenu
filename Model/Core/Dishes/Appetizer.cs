@@ -4,10 +4,10 @@ using Model.Core.Abstract;
 
 public class Appetizer : Dish
 {
-    public int Weight { get; set; }
-    public bool IsHot { get; set; }
-    public int SpiceLevel { get; set; }
-    public bool IsVegan { get; set; }
+    public int Weight { get; private set; }
+    public bool IsHot { get; private set; }
+    public int SpiceLevel { get; private set; }
+    public bool IsVegan { get; private set; }
 
     public Appetizer(
         string name,
@@ -19,6 +19,8 @@ public class Appetizer : Dish
         bool isVegan)
         : base(name, price, description, "Appetizers")
     {
+        ValidateWeight(weight);
+        ValidateSpiceLevel(spiceLevel);
         Weight = weight;
         IsHot = isHot;
         SpiceLevel = spiceLevel;

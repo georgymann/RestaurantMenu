@@ -4,10 +4,10 @@ using Model.Core.Abstract;
 
 public class Tea : Dish
 {
-    public double Volume { get; set; }
-    public bool IsHot { get; set; }
-    public bool HasCaffeine { get; set; }
-    public int Calories { get; set; }
+    public double Volume { get; private set; }
+    public bool IsHot { get; private set; }
+    public bool HasCaffeine { get; private set; }
+    public int Calories { get; private set; }
 
     public Tea(
         string name,
@@ -19,6 +19,8 @@ public class Tea : Dish
         int calories)
         : base(name, price, description, "Tea")
     {
+        ValidateVolume(volume);
+        ValidateCalories(calories);
         Volume = volume;
         IsHot = isHot;
         HasCaffeine = hasCaffeine;

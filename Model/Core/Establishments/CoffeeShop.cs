@@ -5,10 +5,10 @@ using Model.Core.Menus;
 
 public class CoffeeShop : Establishment
 {
-    public bool HasAlternativeMilk { get; set; }
-    public bool HasBakery { get; set; }
-    public double AverageCoffeePrice { get; set; }
-    public bool HasWifi { get; set; }
+    public bool HasAlternativeMilk { get; private set; }
+    public bool HasBakery { get; private set; }
+    public double AverageCoffeePrice { get; private set; }
+    public bool HasWifi { get; private set; }
 
     public CoffeeShop(
         string name,
@@ -22,6 +22,8 @@ public class CoffeeShop : Establishment
         bool hasWifi)
         : base(name, address, description, menu, rating)
     {
+        if (averageCoffeePrice < 0)
+            throw new ArgumentException("Средняя цена кофе не может быть отрицательной.");
         HasAlternativeMilk = hasAlternativeMilk;
         HasBakery = hasBakery;
         AverageCoffeePrice = averageCoffeePrice;

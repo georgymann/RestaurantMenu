@@ -25,4 +25,9 @@ public class SeasonalMenu : Menu
     {
         return $"{Name} | {Description} | Сезон: {Season} | Количество блюд: {Count}";
     }
+    
+    public override string ToString()
+    {
+        return $"{Name} | Сезон: {Season}";
+    }
 }

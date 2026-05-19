@@ -1,18 +1,19 @@
+using Model.Core.Interfaces;
 using Model.Core.Menus;
+
 namespace Model.Core.Abstract;
 
-public abstract partial class Establishment
+public abstract partial class Establishment : ISeasonalMenu
 {
-    protected int _id;
+    protected Guid _id;
     protected string _name;
     protected string _address;
     protected string _description;
     protected Menu _menu;
     protected bool _isOpen;
     protected double _rating;
-    protected static int _nextId = 200001;
 
-    public int ID => _id;
+    public Guid ID => _id;
     public string Name => _name;
     public string Address => _address;
     public string Description => _description;
@@ -25,10 +26,12 @@ public abstract partial class Establishment
         _name = string.Empty;
         _address = string.Empty;
         _description = string.Empty;
-        _menu = new Menu();
         _isOpen = true;
         _rating = 0;
-        _id = _nextId++;
+        _id = Guid.NewGuid();
+        _menu = new Menu();
+        _seasonalMenu = new SeasonalMenu();
+        _hasSeasonalMenu = false;
     }
 
     protected Establishment(string name, string address, string description, Menu menu, double rating)
@@ -56,10 +59,12 @@ public abstract partial class Establishment
         _name = name;
         _address = address;
         _description = description;
-        _menu = menu ?? throw new ArgumentNullException(nameof(menu));
         _isOpen = true;
         _rating = rating;
-        _id = _nextId++;
+        _id = Guid.NewGuid();
+        _menu = menu ?? throw new ArgumentNullException(nameof(menu));
+        _seasonalMenu = new SeasonalMenu();
+        _hasSeasonalMenu = false;
     }
 
     public abstract string GetEstablishmentType();

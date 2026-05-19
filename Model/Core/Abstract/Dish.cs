@@ -2,15 +2,14 @@ namespace Model.Core.Abstract;
 
 public abstract class Dish
 {
-    protected int _id;
+    protected Guid _id;
     protected string _name;
     protected double _price;
     protected string _description;
     protected string _category;
     protected bool _isAvailable;
-    protected static int _nextId = 100001;
 
-    public int ID => _id;
+    public Guid ID => _id;
     public string Name => _name;
     public double Price => _price;
     public string Description => _description;
@@ -24,7 +23,7 @@ public abstract class Dish
         _description = string.Empty;
         _category = string.Empty;
         _isAvailable = true;
-        _id = _nextId++;
+        _id = Guid.NewGuid();
     }
     
     protected Dish(string name, double price, string description, string category)
@@ -54,7 +53,7 @@ public abstract class Dish
         _description = description;
         _category = category;
         _isAvailable = true;
-        _id = _nextId++;
+        _id = Guid.NewGuid();
     }
 
     public abstract string GetDishType();

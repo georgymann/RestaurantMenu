@@ -1,6 +1,7 @@
 namespace Model.Data.Serialization.DTO;
 using System.Xml.Serialization;
 
+[XmlInclude(typeof(AppetizerDTO))]
 [XmlInclude(typeof(BakeryDTO))]
 [XmlInclude(typeof(BreakfastDTO))]
 [XmlInclude(typeof(CocktailDTO))]

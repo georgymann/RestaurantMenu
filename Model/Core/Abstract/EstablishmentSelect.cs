@@ -12,7 +12,7 @@ public abstract partial class Establishment
         List<Dish> selectedDishes = new List<Dish>();
         foreach (Dish dish in Menu.Dishes)
         {
-            if (dish.GetType() == type)
+            if (type.IsInstanceOfType(dish))
             {
                 selectedDishes.Add(dish);
             }

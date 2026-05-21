@@ -489,8 +489,8 @@ public abstract class SerializerBase
         List<Dish> dishes = new();
         foreach (DishDTO dishDto in dto.Dishes)
         {
-            Dish? dish = DeserializeDish(dishDto);
-            if (dish != null) { dishes.Add(dish); }
+            Dish dish = DeserializeDish(dishDto);
+            dishes.Add(dish);
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Season))

@@ -5,13 +5,13 @@ namespace Model.Core.Abstract;
 
 public abstract partial class Establishment
 {
-    protected IMenu _seasonalMenu;
+    protected SeasonalMenu _seasonalMenu;
     protected bool _hasSeasonalMenu;
 
     public IMenu SeasonalMenu => _seasonalMenu;
     public bool HasSeasonalMenu => _hasSeasonalMenu;
 
-    public void AddSeasonalMenu(IMenu menu)
+    public void AddSeasonalMenu(SeasonalMenu menu)
     {
         if (menu == null)
         {

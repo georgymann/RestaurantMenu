@@ -24,6 +24,8 @@ public class Restaurant : Establishment
     {
         if (averageCheck < 0)
             throw new ArgumentException("Средний чек не может быть отрицательным.");
+        if (string.IsNullOrWhiteSpace(cuisineType))
+            throw new ArgumentException("Тип кухни не может быть пустым.");
         CuisineType = cuisineType;
         HasMichelinStar = hasMichelinStar;
         AverageCheck = averageCheck;

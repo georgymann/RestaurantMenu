@@ -26,6 +26,22 @@ public class Dessert : Dish
         IsFrozen = isFrozen;
         IsVegan = isVegan;
     }
+    
+    public Dessert(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int calories,
+        int weight,
+        bool isFrozen,
+        bool isVegan)
+        : this(name, price, description, calories, weight, isFrozen, isVegan)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

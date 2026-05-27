@@ -26,6 +26,22 @@ public class Tea : Dish
         HasCaffeine = hasCaffeine;
         Calories = calories;
     }
+    
+    public Tea(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        double volume,
+        bool isHot,
+        bool hasCaffeine,
+        int calories)
+        : this(name, price, description, volume, isHot, hasCaffeine, calories)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

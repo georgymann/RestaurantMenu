@@ -27,6 +27,22 @@ public class MainCourse : Dish
         IsVegan = isVegan;
         Calories = calories;
     }
+    
+    public MainCourse(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int weight,
+        int spiceLevel,
+        bool isVegan,
+        int calories)
+        : this(name, price, description, weight, spiceLevel, isVegan, calories)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

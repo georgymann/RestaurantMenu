@@ -26,6 +26,22 @@ public class Soup : Dish
         IsVegan = isVegan;
         SpiceLevel = spiceLevel;
     }
+    
+    public Soup(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int volume,
+        bool isHot,
+        bool isVegan,
+        int spiceLevel)
+        : this(name, price, description, volume, isHot, isVegan, spiceLevel)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

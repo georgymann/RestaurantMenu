@@ -31,6 +31,24 @@ public class Restaurant : Establishment
         AverageCheck = averageCheck;
         HasDelivery = hasDelivery;
     }
+    
+    public Restaurant(
+        Guid id,
+        string name,
+        string address,
+        string description,
+        bool isOpen,
+        Menu menu,
+        double rating,
+        string cuisineType,
+        bool hasMichelinStar,
+        double averageCheck,
+        bool hasDelivery)
+        : this(name, address, description, menu, rating, cuisineType, hasMichelinStar, averageCheck, hasDelivery)
+    {
+        _id = id;
+        _isOpen = isOpen;
+    }
 
     public override string GetEstablishmentType()
     {

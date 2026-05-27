@@ -29,6 +29,24 @@ public class CoffeeShop : Establishment
         AverageCoffeePrice = averageCoffeePrice;
         HasWifi = hasWifi;
     }
+    
+    public CoffeeShop(
+        Guid id,
+        string name,
+        string address,
+        string description,
+        bool isOpen,
+        Menu menu,
+        double rating,
+        bool hasAlternativeMilk,
+        bool hasBakery,
+        double averageCoffeePrice,
+        bool hasWifi)
+        : this(name, address, description, menu, rating, hasAlternativeMilk, hasBakery, averageCoffeePrice, hasWifi)
+    {
+        _id = id;
+        _isOpen = isOpen;
+    }
 
     public override string GetEstablishmentType()
     {

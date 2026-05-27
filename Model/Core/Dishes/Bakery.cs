@@ -29,6 +29,23 @@ public class Bakery : Dish
         IsFresh = isFresh;
         IsVegan = isVegan;
     }
+    
+    public Bakery(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int weight,
+        int calories,
+        bool isSweet,
+        bool isFresh,
+        bool isVegan)
+        : this(name, price, description, weight, calories, isSweet, isFresh, isVegan)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

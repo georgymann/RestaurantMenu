@@ -26,7 +26,23 @@ public class Drink : Dish
         HasSugar = hasSugar;
         Calories = calories;
     }
-
+    
+    public Drink(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        double volume,
+        bool isCold,
+        bool hasSugar,
+        int calories)
+        : this(name, price, description, volume, isCold, hasSugar, calories)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
+    
     public override string GetDishType()
     {
         return "Напиток";

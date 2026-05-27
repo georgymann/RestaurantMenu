@@ -26,6 +26,22 @@ public class SideDish : Dish
         IsVegan = isVegan;
         IsGlutenFree = isGlutenFree;
     }
+    
+    public SideDish(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int weight,
+        int calories,
+        bool isVegan,
+        bool isGlutenFree)
+        : this(name, price, description, weight, calories, isVegan, isGlutenFree)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

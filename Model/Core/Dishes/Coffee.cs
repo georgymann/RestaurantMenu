@@ -33,6 +33,23 @@ public class Coffee : Dish
         CaffeineLevel = caffeineLevel;
         Calories = calories;
     }
+    
+    public Coffee(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        double volume,
+        bool isHot,
+        bool hasMilk,
+        int caffeineLevel,
+        int calories)
+        : this(name, price, description, volume, isHot, hasMilk, caffeineLevel, calories)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

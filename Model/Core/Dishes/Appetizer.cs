@@ -26,6 +26,22 @@ public class Appetizer : Dish
         SpiceLevel = spiceLevel;
         IsVegan = isVegan;
     }
+    
+    public Appetizer(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int weight,
+        bool isHot,
+        int spiceLevel,
+        bool isVegan)
+        : this(name, price, description, weight, isHot, spiceLevel, isVegan)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

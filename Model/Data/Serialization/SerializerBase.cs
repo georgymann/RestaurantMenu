@@ -326,49 +326,57 @@ public abstract class SerializerBase
         if (dto is DrinkDTO drinkDTO)
         {
             return new Drink(
-                    drinkDTO.Name, 
-                    drinkDTO.Price, 
-                    drinkDTO.Description,  
-                    drinkDTO.Volume, 
-                    drinkDTO.IsCold, 
-                    drinkDTO.HasSugar, 
-                    drinkDTO.Calories
-                    );
+                drinkDTO.Id,
+                drinkDTO.Name, 
+                drinkDTO.Price,
+                drinkDTO.Description, 
+                drinkDTO.IsAvailable,
+                drinkDTO.Volume, 
+                drinkDTO.IsCold, 
+                drinkDTO.HasSugar, 
+                drinkDTO.Calories
+                );
         }
 
         if (dto is TeaDTO teaDTO)
         {
             return new Tea( 
+                teaDTO.Id,
                 teaDTO.Name,
                 teaDTO.Price,
                 teaDTO.Description,
+                teaDTO.IsAvailable,
                 teaDTO.Volume,
                 teaDTO.IsHot,
                 teaDTO.HasCaffeine,
                 teaDTO.Calories
-            );
+                );
         }
 
         if (dto is CoffeeDTO coffeeDTO)
         {
             return new Coffee(
+                coffeeDTO.Id,
                 coffeeDTO.Name,
                 coffeeDTO.Price,
                 coffeeDTO.Description,
+                coffeeDTO.IsAvailable,
                 coffeeDTO.Volume,
                 coffeeDTO.IsHot,
                 coffeeDTO.HasMilk,
                 coffeeDTO.CaffeineLevel,
                 coffeeDTO.Calories
-            );
+                );
         }
 
         if (dto is CocktailDTO cocktailDTO)
         {
             return new Cocktail(
+                cocktailDTO.Id,
                 cocktailDTO.Name,
                 cocktailDTO.Price,
                 cocktailDTO.Description,
+                cocktailDTO.IsAvailable,
                 cocktailDTO.Volume,
                 cocktailDTO.Calories,
                 cocktailDTO.IsAlcoholic,
@@ -379,9 +387,11 @@ public abstract class SerializerBase
         if (dto is AppetizerDTO appetizerDTO)
         {
             return new Appetizer(
+                appetizerDTO.Id,
                 appetizerDTO.Name,
                 appetizerDTO.Price,
                 appetizerDTO.Description,
+                appetizerDTO.IsAvailable,
                 appetizerDTO.Weight,
                 appetizerDTO.IsHot,
                 appetizerDTO.SpiceLevel,
@@ -392,9 +402,11 @@ public abstract class SerializerBase
         if (dto is BakeryDTO bakeryDTO)
         {
             return new Bakery(
+                bakeryDTO.Id,
                 bakeryDTO.Name,
                 bakeryDTO.Price,
                 bakeryDTO.Description,
+                bakeryDTO.IsAvailable,
                 bakeryDTO.Weight,
                 bakeryDTO.Calories,
                 bakeryDTO.IsSweet,
@@ -406,9 +418,11 @@ public abstract class SerializerBase
         if (dto is BreakfastDTO breakfastDTO)
         {
             return new Breakfast(
+                breakfastDTO.Id,
                 breakfastDTO.Name,
                 breakfastDTO.Price,
                 breakfastDTO.Description,
+                breakfastDTO.IsAvailable,
                 breakfastDTO.Weight,
                 breakfastDTO.Calories,
                 breakfastDTO.IncludesDrink,
@@ -419,9 +433,11 @@ public abstract class SerializerBase
         if (dto is DessertDTO dessertDTO)
         {
             return new Dessert(
+                dessertDTO.Id,
                 dessertDTO.Name,
                 dessertDTO.Price,
                 dessertDTO.Description,
+                dessertDTO.IsAvailable,
                 dessertDTO.Calories,
                 dessertDTO.Weight,
                 dessertDTO.IsFrozen,
@@ -432,9 +448,11 @@ public abstract class SerializerBase
         if (dto is MainCourseDTO mainCourseDTO)
         {
             return new MainCourse(
+                mainCourseDTO.Id,
                 mainCourseDTO.Name,
                 mainCourseDTO.Price,
                 mainCourseDTO.Description,
+                mainCourseDTO.IsAvailable,
                 mainCourseDTO.Weight,
                 mainCourseDTO.SpiceLevel,
                 mainCourseDTO.IsVegan,
@@ -445,9 +463,11 @@ public abstract class SerializerBase
         if (dto is SaladDTO saladDTO)
         {
             return new Salad(
+                saladDTO.Id,
                 saladDTO.Name,
                 saladDTO.Price,
                 saladDTO.Description,
+                saladDTO.IsAvailable,
                 saladDTO.Weight,
                 saladDTO.IsVegan,
                 saladDTO.HasSeafood,
@@ -458,9 +478,11 @@ public abstract class SerializerBase
         if (dto is SideDishDTO sideDishDTO)
         {
             return new SideDish(
+                sideDishDTO.Id,
                 sideDishDTO.Name,
                 sideDishDTO.Price,
                 sideDishDTO.Description,
+                sideDishDTO.IsAvailable,
                 sideDishDTO.Weight,
                 sideDishDTO.Calories,
                 sideDishDTO.IsVegan,
@@ -471,14 +493,16 @@ public abstract class SerializerBase
         if (dto is SoupDTO soupDTO)
         {
             return new Soup(
+                soupDTO.Id,
                 soupDTO.Name,
                 soupDTO.Price,
                 soupDTO.Description,
+                soupDTO.IsAvailable,
                 soupDTO.Volume,
                 soupDTO.IsHot,
                 soupDTO.IsVegan,
                 soupDTO.SpiceLevel
-            );
+                );
         }
 
         throw new Exception("Unknown dishDTO type");
@@ -517,9 +541,11 @@ public abstract class SerializerBase
         if (dto is RestaurantDTO restaurantDTO)
         {
             Restaurant restaurant = new Restaurant(
+                restaurantDTO.Id,
                 restaurantDTO.Name, 
                 restaurantDTO.Address, 
                 restaurantDTO.Description, 
+                restaurantDTO.IsOpen,
                 menu,
                 restaurantDTO.Rating,
                 restaurantDTO.CuisineType, 
@@ -536,9 +562,11 @@ public abstract class SerializerBase
         {
 
             Cafe cafe = new Cafe(
+                cafeDTO.Id,
                 cafeDTO.Name,
                 cafeDTO.Address,
                 cafeDTO.Description,
+                cafeDTO.IsOpen,
                 menu,
                 cafeDTO.Rating,
                 cafeDTO.HasBusinessLunch,
@@ -554,9 +582,11 @@ public abstract class SerializerBase
         if (dto is CoffeeShopDTO coffeeShopDTO)
         {
             CoffeeShop coffeeShop = new CoffeeShop(
+                coffeeShopDTO.Id,
                 coffeeShopDTO.Name,
                 coffeeShopDTO.Address,
                 coffeeShopDTO.Description,
+                coffeeShopDTO.IsOpen,
                 menu,
                 coffeeShopDTO.Rating,
                 coffeeShopDTO.HasAlternativeMilk,

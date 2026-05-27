@@ -27,6 +27,22 @@ public class Cocktail : Dish
         IsAlcoholic = isAlcoholic;
         IsCold = isCold;
     }
+    
+    public Cocktail(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        double volume,
+        int calories,
+        bool isAlcoholic,
+        bool isCold)
+        : this(name, price, description, volume, calories, isAlcoholic, isCold)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

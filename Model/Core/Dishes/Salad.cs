@@ -27,6 +27,22 @@ public class Salad : Dish
         HasSeafood = hasSeafood;
         Calories = calories;
     }
+    
+    public Salad(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int weight,
+        bool isVegan,
+        bool hasSeafood,
+        int calories)
+        : this(name, price, description, weight, isVegan, hasSeafood, calories)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

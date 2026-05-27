@@ -26,6 +26,22 @@ public class Breakfast : Dish
         IncludesDrink = includesDrink;
         IsVegan = isVegan;
     }
+    
+    public Breakfast(
+        Guid id,
+        string name,
+        double price,
+        string description,
+        bool isAvailable,
+        int weight,
+        int calories,
+        bool includesDrink,
+        bool isVegan)
+        : this(name, price, description, weight, calories, includesDrink, isVegan)
+    {
+        _id = id;
+        _isAvailable = isAvailable;
+    }
 
     public override string GetDishType()
     {

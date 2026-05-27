@@ -29,6 +29,24 @@ public class Cafe : Establishment
         HasDelivery = hasDelivery;
         HasOutdoorSeating = hasOutdoorSeating;
     }
+    
+    public Cafe(
+        Guid id,
+        string name,
+        string address,
+        string description,
+        bool isOpen,
+        Menu menu,
+        double rating,
+        bool hasBusinessLunch,
+        double averageCheck,
+        bool hasDelivery,
+        bool hasOutdoorSeating)
+        : this(name, address, description, menu, rating, hasBusinessLunch, averageCheck, hasDelivery, hasOutdoorSeating)
+    {
+        _id = id;
+        _isOpen = isOpen;
+    }
 
     public override string GetEstablishmentType()
     {

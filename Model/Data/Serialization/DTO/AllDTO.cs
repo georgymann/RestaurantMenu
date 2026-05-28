@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 [XmlInclude(typeof(AppetizerDTO))]
 [XmlInclude(typeof(BakeryDTO))]
+[XmlInclude(typeof(BeerDTO))]
 [XmlInclude(typeof(BreakfastDTO))]
 [XmlInclude(typeof(CocktailDTO))]
 [XmlInclude(typeof(CoffeeDTO))]
@@ -16,10 +17,10 @@ using System.Xml.Serialization;
 public class DishDTO
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public double Price { get; set; }
-    public string Description { get; set; }
-    public string Category { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
     public bool IsAvailable { get; set; }
 }
 
@@ -29,6 +30,12 @@ public class DrinkDTO : DishDTO
     public bool IsCold { get; set; }
     public bool HasSugar { get; set; }
     public int Calories { get; set; }
+}
+
+public class BeerDTO : DrinkDTO
+{
+    public double AlcoholPercent { get; set; }
+    public bool IsDraft { get; set; }
 }
 
 public class TeaDTO : DishDTO
@@ -123,10 +130,16 @@ public class SoupDTO : DishDTO
 
 public class MenuDTO
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string Season { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string Season { get; set; } = string.Empty;
     public List<DishDTO> Dishes { get; set; } = new List<DishDTO>();
+}
+
+public class ContactsDTO
+{
+    public string Phone { get; set; } = string.Empty;
+    public string Website { get; set; } = string.Empty;
 }
 
 [XmlInclude(typeof(RestaurantDTO))]
@@ -135,12 +148,13 @@ public class MenuDTO
 public class EstablishmentDTO
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Address { get; set; }
-    public string Description { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public double Rating { get; set; }
     public bool IsOpen { get; set; }
     public bool HasSeasonalMenu { get; set; }
+    public ContactsDTO Contacts { get; set; } = new ContactsDTO();
     public MenuDTO Menu { get; set; } = new MenuDTO();
     public MenuDTO SeasonalMenu { get; set; } = new MenuDTO();
 }
@@ -163,7 +177,7 @@ public class CoffeeShopDTO : EstablishmentDTO
 
 public class RestaurantDTO : EstablishmentDTO
 {
-    public string CuisineType { get; set; }
+    public string CuisineType { get; set; } = string.Empty;
     public bool HasMichelinStar { get; set; }
     public double AverageCheck { get; set; }
     public bool HasDelivery { get; set; }

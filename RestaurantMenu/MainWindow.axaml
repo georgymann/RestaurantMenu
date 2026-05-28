@@ -2,8 +2,109 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
+        d:DesignWidth="900"
+        d:DesignHeight="600"
         x:Class="RestaurantMenu.MainWindow"
-        Title="RestaurantMenu">
-    Welcome to Avalonia!
+        Title="RestaurantMenu"
+        Width="900"
+        Height="600"
+        MinWidth="800"
+        MinHeight="540">
+
+    <Grid RowDefinitions="Auto,*"
+          Background="#F4F5F7">
+
+        <Border Grid.Row="0"
+                Background="White"
+                BorderBrush="#D9DDE3"
+                BorderThickness="0,0,0,1"
+                Padding="28,22">
+
+            <TextBlock Text="Restaurant Menu"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       Foreground="#18212F"/>
+        </Border>
+
+        <Grid Grid.Row="1"
+              ColumnDefinitions="360,*"
+              Margin="28">
+
+            <Border Grid.Column="0"
+                    Width="360"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="White"
+                    BorderBrush="#D9DDE3"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="22">
+
+                <StackPanel Spacing="18">
+
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="Тип заведения"
+                                   FontWeight="SemiBold"/>
+                        <ComboBox x:Name="EstablishmentTypeComboBox"
+                                  PlaceholderText="Все заведения"
+                                  SelectionChanged="FilterEstablishments"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="Заведение"
+                                   FontWeight="SemiBold"/>
+                        <ComboBox x:Name="EstablishmentComboBox"
+                                  PlaceholderText="Выберите заведение"
+                                  SelectionChanged="SelectEstablishment"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="Вид меню"
+                                   FontWeight="SemiBold"/>
+                        <ComboBox x:Name="MenuTypeComboBox"
+                                  IsEnabled="False"
+                                  PlaceholderText="Выберите меню"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="Формат файлов"
+                                   FontWeight="SemiBold"/>
+                        <ComboBox x:Name="FormatComboBox"
+                                  PlaceholderText="Выберите формат cохранения"
+                                  SelectionChanged="ChangeFormat"/>
+                    </StackPanel>
+
+                    <Button x:Name="ShowMenuButton"
+                            Content="Показать меню"
+                            Height="42"
+                            HorizontalContentAlignment="Center"
+                            IsEnabled="False"
+                            Click="OpenMenu"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Column="1"
+                        Margin="42,22,0,0"
+                        Spacing="12">
+
+                <TextBlock Text="Выбранное заведение"
+                           FontSize="14"
+                           Foreground="#667085"/>
+
+                <TextBlock x:Name="SelectedEstablishmentText"
+                           Text="Заведение пока не выбрано"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="#18212F"/>
+
+                <TextBlock x:Name="SelectedEstablishmentInfoText"
+                           Text="Выберите заведение из списка слева."
+                           FontSize="14"
+                           TextWrapping="Wrap"
+                           Foreground="#667085"/>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
 </Window>

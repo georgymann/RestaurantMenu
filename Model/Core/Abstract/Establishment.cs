@@ -1,3 +1,4 @@
+using Model.Core.Contacts;
 using Model.Core.Interfaces;
 using Model.Core.Menus;
 
@@ -12,6 +13,7 @@ public abstract partial class Establishment : ISeasonalMenu
     protected Menu _menu;
     protected bool _isOpen;
     protected double _rating;
+    protected ContactInfo _contacts;
 
     public Guid ID => _id;
     public string Name => _name;
@@ -20,6 +22,7 @@ public abstract partial class Establishment : ISeasonalMenu
     public Menu Menu => _menu;
     public bool IsOpen => _isOpen;
     public double Rating => _rating;
+    public ContactInfo Contacts => _contacts;
 
     protected Establishment()
     {
@@ -30,6 +33,7 @@ public abstract partial class Establishment : ISeasonalMenu
         _rating = 0;
         _id = Guid.NewGuid();
         _menu = new Menu();
+        _contacts = new ContactInfo();
         _seasonalMenu = new SeasonalMenu();
         _hasSeasonalMenu = false;
     }
@@ -63,6 +67,7 @@ public abstract partial class Establishment : ISeasonalMenu
         _rating = rating;
         _id = Guid.NewGuid();
         _menu = menu ?? throw new ArgumentNullException(nameof(menu));
+        _contacts = new ContactInfo();
         _seasonalMenu = new SeasonalMenu();
         _hasSeasonalMenu = false;
     }
@@ -71,7 +76,15 @@ public abstract partial class Establishment : ISeasonalMenu
 
     public virtual string GetInfo()
     {
-        return $"{GetEstablishmentType()} | {Name} | {Address} | Рейтинг: {Rating}";
+        if (Contacts.IsEmpty())
+        {
+            return $"{GetEstablishmentType()} | {Name} | {Address} | Рейтинг: {Rating}";
+        }
+
+        return string.Join(
+            Environment.NewLine,
+            $"{GetEstablishmentType()} | {Name} | {Address} | Рейтинг: {Rating}",
+            Contacts.ToString());
     }
 
     public override string ToString()
@@ -112,6 +125,11 @@ public abstract partial class Establishment : ISeasonalMenu
     public void ChangeMenu(Menu newMenu)
     {
         _menu = newMenu ?? throw new ArgumentNullException(nameof(newMenu));
+    }
+
+    public void ChangeContacts(ContactInfo newContacts)
+    {
+        _contacts = newContacts ?? throw new ArgumentNullException(nameof(newContacts));
     }
 
     public void ChangeRating(double newRating)

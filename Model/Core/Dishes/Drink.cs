@@ -17,7 +17,20 @@ public class Drink : Dish
         bool isCold,
         bool hasSugar,
         int calories)
-        : base(name, price, description, "Drinks")
+        : this(name, price, description, "Drinks", volume, isCold, hasSugar, calories)
+    {
+    }
+
+    protected Drink(
+        string name,
+        double price,
+        string description,
+        string category,
+        double volume,
+        bool isCold,
+        bool hasSugar,
+        int calories)
+        : base(name, price, description, category)
     {
         ValidateVolume(volume);
         ValidateCalories(calories);

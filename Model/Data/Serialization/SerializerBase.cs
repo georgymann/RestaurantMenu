@@ -1,4 +1,5 @@
 using Model.Core.Abstract;
+using Model.Core.Contacts;
 using Model.Core.Dishes;
 using Model.Core.Establishments;
 using Model.Core.Menus;
@@ -12,6 +13,26 @@ public abstract class SerializerBase
 {
     protected DishDTO SerializeDish(Dish dish)
     {
+        if (dish is Beer beer)
+        {
+            return new BeerDTO
+            {
+                Id = beer.ID,
+                Name = beer.Name,
+                Price = beer.Price,
+                Description = beer.Description,
+                Category = beer.Category,
+                IsAvailable = beer.IsAvailable,
+
+                Volume = beer.Volume,
+                IsCold = beer.IsCold,
+                HasSugar = beer.HasSugar,
+                Calories = beer.Calories,
+                AlcoholPercent = beer.AlcoholPercent,
+                IsDraft = beer.IsDraft
+            };
+        }
+
         if (dish is Drink drink)
         {
             return new DrinkDTO
@@ -248,6 +269,25 @@ public abstract class SerializerBase
         };
     }
 
+    protected ContactsDTO SerializeContacts(ContactInfo contacts)
+    {
+        return new ContactsDTO
+        {
+            Phone = contacts.Phone,
+            Website = contacts.Website
+        };
+    }
+
+    protected ContactInfo DeserializeContacts(ContactsDTO? dto)
+    {
+        if (dto == null || string.IsNullOrWhiteSpace(dto.Phone) || string.IsNullOrWhiteSpace(dto.Website))
+        {
+            return new ContactInfo();
+        }
+
+        return new ContactInfo(dto.Phone, dto.Website);
+    }
+
     protected EstablishmentDTO SerializeEstablishment(Establishment establishment)
     {
         MenuDTO menuDto = SerializeMenu(establishment.Menu);
@@ -268,6 +308,7 @@ public abstract class SerializerBase
                 HasSeasonalMenu = cafe.HasSeasonalMenu,
                 Menu = menuDto,
                 SeasonalMenu = seasonalMenuDto,
+                Contacts = SerializeContacts(cafe.Contacts),
 
                 HasBusinessLunch = cafe.HasBusinessLunch,
                 AverageCheck = cafe.AverageCheck,
@@ -289,6 +330,7 @@ public abstract class SerializerBase
                 HasSeasonalMenu = coffeeShop.HasSeasonalMenu,
                 Menu = menuDto,
                 SeasonalMenu = seasonalMenuDto,
+                Contacts = SerializeContacts(coffeeShop.Contacts),
 
                 HasAlternativeMilk = coffeeShop.HasAlternativeMilk,
                 HasBakery = coffeeShop.HasBakery,
@@ -310,6 +352,7 @@ public abstract class SerializerBase
                 HasSeasonalMenu = restaurant.HasSeasonalMenu,
                 Menu = menuDto,
                 SeasonalMenu = seasonalMenuDto,
+                Contacts = SerializeContacts(restaurant.Contacts),
                 
                 CuisineType = restaurant.CuisineType,
                 HasMichelinStar = restaurant.HasMichelinStar,
@@ -323,6 +366,23 @@ public abstract class SerializerBase
 
     protected Dish DeserializeDish(DishDTO dto)
     {
+        if (dto is BeerDTO beerDTO)
+        {
+            return new Beer(
+                beerDTO.Id,
+                beerDTO.Name,
+                beerDTO.Price,
+                beerDTO.Description,
+                beerDTO.IsAvailable,
+                beerDTO.Volume,
+                beerDTO.IsCold,
+                beerDTO.HasSugar,
+                beerDTO.Calories,
+                beerDTO.AlcoholPercent,
+                beerDTO.IsDraft
+                );
+        }
+
         if (dto is DrinkDTO drinkDTO)
         {
             return new Drink(
@@ -554,6 +614,7 @@ public abstract class SerializerBase
                 restaurantDTO.HasDelivery
                 );
 
+            restaurant.ChangeContacts(DeserializeContacts(restaurantDTO.Contacts));
             if (seasonalMenu != null) { restaurant.AddSeasonalMenu(seasonalMenu); }
             return restaurant;
         }
@@ -575,6 +636,7 @@ public abstract class SerializerBase
                 cafeDTO.HasOutdoorSeating
                 );
             
+            cafe.ChangeContacts(DeserializeContacts(cafeDTO.Contacts));
             if (seasonalMenu != null) { cafe.AddSeasonalMenu(seasonalMenu); }
             return cafe;
         }
@@ -595,6 +657,7 @@ public abstract class SerializerBase
                 coffeeShopDTO.HasWifi
                 );
             
+            coffeeShop.ChangeContacts(DeserializeContacts(coffeeShopDTO.Contacts));
             if (seasonalMenu != null) { coffeeShop.AddSeasonalMenu(seasonalMenu); }
             return coffeeShop;
         }

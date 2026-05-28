@@ -1,0 +1,92 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="900"
+        d:DesignHeight="600"
+        x:Class="RestaurantMenu.MenuWindow"
+        Title="Меню"
+        Width="900"
+        Height="600">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto"
+          Background="#F4F5F7"
+          Margin="24">
+
+        <StackPanel Grid.Row="0"
+                    Spacing="6">
+            <TextBlock x:Name="WindowTitleText"
+                       Text="Меню"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       Foreground="#18212F"/>
+
+            <TextBlock x:Name="WindowSubtitleText"
+                       Text="Список блюд"
+                       FontSize="14"
+                       Foreground="#667085"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Spacing="12"
+                    Margin="0,22,0,14">
+
+            <TextBlock Text="Категория:"
+                       VerticalAlignment="Center"
+                       FontWeight="SemiBold"/>
+
+            <ComboBox x:Name="CategoryComboBox"
+                      Width="220"
+                      SelectionChanged="FilterDishes"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    Margin="0,0,0,14">
+
+            <TextBox x:Name="DishNameTextBox"
+                     Width="170"
+                     PlaceholderText="Название"/>
+
+            <TextBox x:Name="DishPriceTextBox"
+                     Width="100"
+                     PlaceholderText="Цена"/>
+
+            <TextBox x:Name="DishDescriptionTextBox"
+                     Width="220"
+                     PlaceholderText="Описание"/>
+
+            <ComboBox x:Name="DishTypeComboBox"
+                      Width="160"/>
+
+            <Button Content="Добавить"
+                    Width="110"
+                    Click="AddDish"/>
+        </StackPanel>
+
+        <DataGrid x:Name="DishesDataGrid"
+                  Grid.Row="3"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  SelectionMode="Single"/>
+
+        <StackPanel Grid.Row="4"
+                    Orientation="Horizontal"
+                    Spacing="12"
+                    HorizontalAlignment="Right"
+                    Margin="0,16,0,0">
+
+            <Button x:Name="RemoveDishButton"
+                    Content="Удалить"
+                    Width="110"
+                    Click="RemoveSelectedDish"/>
+
+            <Button Content="Сохранить"
+                    Width="110"
+                    Click="SaveMenu"/>
+        </StackPanel>
+    </Grid>
+</Window>

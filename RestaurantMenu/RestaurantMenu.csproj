@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
@@ -8,15 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="12.0.3"/>
+        <PackageReference Include="Avalonia" Version="12.0.3" />
         <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.0.0" />
-        <PackageReference Include="Avalonia.Desktop" Version="12.0.3"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.3"/>
+        <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.3" />
         <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.1">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Semi.Avalonia" Version="12.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,5 +28,9 @@
       <Content Include="DataFiles/**">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaResource Include="Assets/**" />
     </ItemGroup>
 </Project>

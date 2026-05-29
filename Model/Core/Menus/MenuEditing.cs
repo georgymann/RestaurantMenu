@@ -62,22 +62,4 @@ public partial class Menu
         }
         throw new InvalidOperationException("Блюдо с таким ID не найдено.");
     }
-    
-    public Dish[] FindDishes(Predicate<Dish> predicate)
-    {
-        if (predicate == null)
-        {
-            throw new ArgumentNullException(nameof(predicate));
-        }
-        
-        List<Dish> foundDishes = new List<Dish>();
-        foreach (Dish dish in _dishes)
-        {
-            if (predicate(dish))
-            {
-                foundDishes.Add(dish);
-            }
-        }
-        return foundDishes.ToArray();
-    }
 }

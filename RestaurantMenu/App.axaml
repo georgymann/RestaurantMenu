@@ -1,11 +1,27 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:semi="https://irihi.tech/semi"
              x:Class="RestaurantMenu.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             RequestedThemeVariant="Dark">
+             <!-- "Dark" keeps Semi controls (dropdown popups etc.) dark instead of following the system light theme. -->
 
     <Application.Styles>
-        <FluentTheme />
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+        <semi:SemiTheme Locale="ru-RU" />
+
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="Manrope" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="FontFamily" Value="Manrope" />
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="FontFamily" Value="Manrope" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="FontFamily" Value="Manrope" />
+        </Style>
+        <Style Selector="DataGrid">
+            <Setter Property="FontFamily" Value="Manrope" />
+        </Style>
     </Application.Styles>
 </Application>

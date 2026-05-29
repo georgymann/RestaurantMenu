@@ -16,6 +16,7 @@ using System.Xml.Serialization;
 [XmlInclude(typeof(TeaDTO))]
 public class DishDTO
 {
+    public string Kind { get; set; } = string.Empty;
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public double Price { get; set; }
@@ -147,6 +148,7 @@ public class ContactsDTO
 [XmlInclude(typeof(CoffeeShopDTO))]
 public class EstablishmentDTO
 {
+    public string Kind { get; set; } = string.Empty;
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;

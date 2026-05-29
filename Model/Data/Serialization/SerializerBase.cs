@@ -3,7 +3,6 @@ using Model.Core.Contacts;
 using Model.Core.Dishes;
 using Model.Core.Establishments;
 using Model.Core.Menus;
-using Model.Core.Interfaces;
 using Model.Data.Serialization.DTO;
 
 
@@ -13,257 +12,136 @@ public abstract class SerializerBase
 {
     protected DishDTO SerializeDish(Dish dish)
     {
-        if (dish is Beer beer)
+        DishDTO dto = dish switch
         {
-            return new BeerDTO
+            Beer beer => new BeerDTO
             {
-                Id = beer.ID,
-                Name = beer.Name,
-                Price = beer.Price,
-                Description = beer.Description,
-                Category = beer.Category,
-                IsAvailable = beer.IsAvailable,
-
+                Kind = "Beer",
                 Volume = beer.Volume,
                 IsCold = beer.IsCold,
                 HasSugar = beer.HasSugar,
                 Calories = beer.Calories,
                 AlcoholPercent = beer.AlcoholPercent,
                 IsDraft = beer.IsDraft
-            };
-        }
-
-        if (dish is Drink drink)
-        {
-            return new DrinkDTO
+            },
+            Drink drink => new DrinkDTO
             {
-                Id = drink.ID,
-                Name = drink.Name,
-                Price = drink.Price,
-                Description = drink.Description,
-                Category = drink.Category,
-                IsAvailable = drink.IsAvailable,
-
+                Kind = "Drink",
                 Volume = drink.Volume,
                 IsCold = drink.IsCold,
                 HasSugar = drink.HasSugar,
                 Calories = drink.Calories
-            };
-        }
-        
-        if (dish is Tea tea)
-        {
-            return new TeaDTO
+            },
+            Tea tea => new TeaDTO
             {
-                Id = tea.ID,
-                Name = tea.Name,
-                Price = tea.Price,
-                Description = tea.Description,
-                Category = tea.Category,
-                IsAvailable = tea.IsAvailable,
-
+                Kind = "Tea",
                 Volume = tea.Volume,
                 IsHot = tea.IsHot,
-                HasCaffeine =  tea.HasCaffeine,
+                HasCaffeine = tea.HasCaffeine,
                 Calories = tea.Calories
-            };
-        }
-        
-        if (dish is Coffee coffee)
-        {
-            return new CoffeeDTO
+            },
+            Coffee coffee => new CoffeeDTO
             {
-                Id = coffee.ID,
-                Name = coffee.Name,
-                Price = coffee.Price,
-                Description = coffee.Description,
-                Category = coffee.Category,
-                IsAvailable = coffee.IsAvailable,
-
+                Kind = "Coffee",
                 Volume = coffee.Volume,
                 IsHot = coffee.IsHot,
-                HasMilk =  coffee.HasMilk,
+                HasMilk = coffee.HasMilk,
                 CaffeineLevel = coffee.CaffeineLevel,
                 Calories = coffee.Calories
-            };
-        }
-
-        if (dish is Cocktail cocktail)
-        {
-            return new CocktailDTO
+            },
+            Cocktail cocktail => new CocktailDTO
             {
-                Id = cocktail.ID,
-                Name = cocktail.Name,
-                Price = cocktail.Price,
-                Description = cocktail.Description,
-                Category = cocktail.Category,
-                IsAvailable = cocktail.IsAvailable,
-
+                Kind = "Cocktail",
                 Volume = cocktail.Volume,
                 IsCold = cocktail.IsCold,
                 Calories = cocktail.Calories,
                 IsAlcoholic = cocktail.IsAlcoholic
-            };
-        }
-        
-        if (dish is Appetizer appetizer)
-        {
-            return new AppetizerDTO
+            },
+            Appetizer appetizer => new AppetizerDTO
             {
-                Id = appetizer.ID,
-                Name = appetizer.Name,
-                Price = appetizer.Price,
-                Description = appetizer.Description,
-                Category = appetizer.Category,
-                IsAvailable = appetizer.IsAvailable,
-
+                Kind = "Appetizer",
                 Weight = appetizer.Weight,
                 IsHot = appetizer.IsHot,
                 SpiceLevel = appetizer.SpiceLevel,
                 IsVegan = appetizer.IsVegan
-            };
-        }
-        
-        if (dish is Bakery bakery)
-        {
-            return new BakeryDTO
+            },
+            Bakery bakery => new BakeryDTO
             {
-                Id = bakery.ID,
-                Name = bakery.Name,
-                Price = bakery.Price,
-                Description = bakery.Description,
-                Category = bakery.Category,
-                IsAvailable = bakery.IsAvailable,
-
+                Kind = "Bakery",
                 Weight = bakery.Weight,
                 Calories = bakery.Calories,
-                IsSweet =  bakery.IsSweet,
-                IsFresh =  bakery.IsFresh,
+                IsSweet = bakery.IsSweet,
+                IsFresh = bakery.IsFresh,
                 IsVegan = bakery.IsVegan
-            };
-        }
-        
-        if (dish is Breakfast breakfast)
-        {
-            return new BreakfastDTO
+            },
+            Breakfast breakfast => new BreakfastDTO
             {
-                Id = breakfast.ID,
-                Name = breakfast.Name,
-                Price = breakfast.Price,
-                Description = breakfast.Description,
-                Category = breakfast.Category,
-                IsAvailable = breakfast.IsAvailable,
-
+                Kind = "Breakfast",
                 Weight = breakfast.Weight,
                 Calories = breakfast.Calories,
                 IncludesDrink = breakfast.IncludesDrink,
                 IsVegan = breakfast.IsVegan
-            };
-        }
-
-        if (dish is Dessert dessert)
-        {
-            return new DessertDTO
+            },
+            Dessert dessert => new DessertDTO
             {
-                Id = dessert.ID,
-                Name = dessert.Name,
-                Price = dessert.Price,
-                Description = dessert.Description,
-                Category = dessert.Category,
-                IsAvailable = dessert.IsAvailable,
-
+                Kind = "Dessert",
                 Calories = dessert.Calories,
                 Weight = dessert.Weight,
                 IsFrozen = dessert.IsFrozen,
                 IsVegan = dessert.IsVegan
-            };
-        }
-        
-        if (dish is MainCourse mainCourse)
-        {
-            return new MainCourseDTO
+            },
+            MainCourse mainCourse => new MainCourseDTO
             {
-                Id = mainCourse.ID,
-                Name = mainCourse.Name,
-                Price = mainCourse.Price,
-                Description = mainCourse.Description,
-                Category = mainCourse.Category,
-                IsAvailable = mainCourse.IsAvailable,
-
+                Kind = "MainCourse",
                 Weight = mainCourse.Weight,
                 SpiceLevel = mainCourse.SpiceLevel,
                 IsVegan = mainCourse.IsVegan,
                 Calories = mainCourse.Calories
-            };
-        }
-        
-        if (dish is Salad salad)
-        {
-            return new SaladDTO
+            },
+            Salad salad => new SaladDTO
             {
-                Id = salad.ID,
-                Name = salad.Name,
-                Price = salad.Price,
-                Description = salad.Description,
-                Category = salad.Category,
-                IsAvailable = salad.IsAvailable,
-
+                Kind = "Salad",
                 Weight = salad.Weight,
                 IsVegan = salad.IsVegan,
                 HasSeafood = salad.HasSeafood,
                 Calories = salad.Calories
-            };
-        }
-        
-        if (dish is SideDish sideDish)
-        {
-            return new SideDishDTO
+            },
+            SideDish sideDish => new SideDishDTO
             {
-                Id = sideDish.ID,
-                Name = sideDish.Name,
-                Price = sideDish.Price,
-                Description = sideDish.Description,
-                Category = sideDish.Category,
-                IsAvailable = sideDish.IsAvailable,
-
+                Kind = "SideDish",
                 Weight = sideDish.Weight,
                 Calories = sideDish.Calories,
                 IsVegan = sideDish.IsVegan,
                 IsGlutenFree = sideDish.IsGlutenFree
-            };
-        }
-
-        if (dish is Soup soup)
-        {
-            return new SoupDTO
+            },
+            Soup soup => new SoupDTO
             {
-                Id = soup.ID,
-                Name = soup.Name,
-                Price = soup.Price,
-                Description = soup.Description,
-                Category = soup.Category,
-                IsAvailable = soup.IsAvailable,
-
+                Kind = "Soup",
                 Volume = soup.Volume,
                 IsHot = soup.IsHot,
                 IsVegan = soup.IsVegan,
                 SpiceLevel = soup.SpiceLevel
-            };
-        }
+            },
+            _ => throw new NotSupportedException($"Неизвестный тип блюда: {dish.GetType().Name}.")
+        };
 
-        throw new Exception($"Unknown dish type");
+        dto.Id = dish.ID;
+        dto.Name = dish.Name;
+        dto.Price = dish.Price;
+        dto.Description = dish.Description;
+        dto.Category = dish.Category;
+        dto.IsAvailable = dish.IsAvailable;
+        return dto;
     }
 
     protected MenuDTO SerializeMenu(Menu menu)
     {
-        string season = string.Empty;
+        string season = menu is SeasonalMenu seasonalMenu ? seasonalMenu.Season : string.Empty;
 
-        if (menu is SeasonalMenu seasonalMenu) { season = seasonalMenu.Season; }
-        
         return new MenuDTO
         {
             Name = menu.Name,
-            Description = menu.Description,  
+            Description = menu.Description,
             Season = season,
             Dishes = menu.Dishes.Select(SerializeDish).ToList()
         };
@@ -280,388 +158,145 @@ public abstract class SerializerBase
 
     protected ContactInfo DeserializeContacts(ContactsDTO? dto)
     {
-        if (dto == null || string.IsNullOrWhiteSpace(dto.Phone) || string.IsNullOrWhiteSpace(dto.Website))
+        ContactInfo contacts = new();
+
+        if (dto == null)
         {
-            return new ContactInfo();
+            return contacts;
         }
 
-        return new ContactInfo(dto.Phone, dto.Website);
+        if (!string.IsNullOrWhiteSpace(dto.Phone))
+        {
+            contacts.ChangePhone(dto.Phone);
+        }
+
+        if (!string.IsNullOrWhiteSpace(dto.Website))
+        {
+            contacts.ChangeWebsite(dto.Website);
+        }
+
+        return contacts;
     }
 
     protected EstablishmentDTO SerializeEstablishment(Establishment establishment)
     {
         MenuDTO menuDto = SerializeMenu(establishment.Menu);
-        MenuDTO seasonalMenuDto;
-        if (establishment.HasSeasonalMenu) { seasonalMenuDto = SerializeMenu((Menu)establishment.SeasonalMenu); }
-        else { seasonalMenuDto = new MenuDTO(); }
-        
-        if (establishment is Cafe cafe)
-        {
-            return new CafeDTO
-            {
-                Id = cafe.ID,
-                Name = cafe.Name,
-                Address = cafe.Address,
-                Description = cafe.Description,
-                Rating = cafe.Rating,
-                IsOpen = cafe.IsOpen,
-                HasSeasonalMenu = cafe.HasSeasonalMenu,
-                Menu = menuDto,
-                SeasonalMenu = seasonalMenuDto,
-                Contacts = SerializeContacts(cafe.Contacts),
+        MenuDTO seasonalMenuDto = establishment.HasSeasonalMenu
+            ? SerializeMenu((Menu)establishment.SeasonalMenu)
+            : new MenuDTO();
 
+        EstablishmentDTO dto = establishment switch
+        {
+            Cafe cafe => new CafeDTO
+            {
+                Kind = "Cafe",
                 HasBusinessLunch = cafe.HasBusinessLunch,
                 AverageCheck = cafe.AverageCheck,
                 HasDelivery = cafe.HasDelivery,
                 HasOutdoorSeating = cafe.HasOutdoorSeating
-            };
-        }
-        
-        if (establishment is CoffeeShop coffeeShop)
-        {
-            return new CoffeeShopDTO
+            },
+            CoffeeShop coffeeShop => new CoffeeShopDTO
             {
-                Id = coffeeShop.ID,
-                Name = coffeeShop.Name,
-                Address = coffeeShop.Address,
-                Description = coffeeShop.Description,
-                Rating = coffeeShop.Rating,
-                IsOpen = coffeeShop.IsOpen,
-                HasSeasonalMenu = coffeeShop.HasSeasonalMenu,
-                Menu = menuDto,
-                SeasonalMenu = seasonalMenuDto,
-                Contacts = SerializeContacts(coffeeShop.Contacts),
-
+                Kind = "CoffeeShop",
                 HasAlternativeMilk = coffeeShop.HasAlternativeMilk,
                 HasBakery = coffeeShop.HasBakery,
                 AverageCoffeePrice = coffeeShop.AverageCoffeePrice,
                 HasWifi = coffeeShop.HasWifi
-            };
-        }
-
-        if (establishment is Restaurant restaurant)
-        {
-            return new RestaurantDTO
+            },
+            Restaurant restaurant => new RestaurantDTO
             {
-                Id = restaurant.ID,
-                Name = restaurant.Name,
-                Address = restaurant.Address,
-                Description = restaurant.Description,
-                Rating = restaurant.Rating,
-                IsOpen = restaurant.IsOpen,
-                HasSeasonalMenu = restaurant.HasSeasonalMenu,
-                Menu = menuDto,
-                SeasonalMenu = seasonalMenuDto,
-                Contacts = SerializeContacts(restaurant.Contacts),
-                
+                Kind = "Restaurant",
                 CuisineType = restaurant.CuisineType,
                 HasMichelinStar = restaurant.HasMichelinStar,
                 AverageCheck = restaurant.AverageCheck,
                 HasDelivery = restaurant.HasDelivery
-            };
-        }
+            },
+            _ => throw new NotSupportedException($"Неизвестный тип заведения: {establishment.GetType().Name}.")
+        };
 
-        throw new Exception($"Unknown establishment type");
+        dto.Id = establishment.ID;
+        dto.Name = establishment.Name;
+        dto.Address = establishment.Address;
+        dto.Description = establishment.Description;
+        dto.Rating = establishment.Rating;
+        dto.IsOpen = establishment.IsOpen;
+        dto.HasSeasonalMenu = establishment.HasSeasonalMenu;
+        dto.Menu = menuDto;
+        dto.SeasonalMenu = seasonalMenuDto;
+        dto.Contacts = SerializeContacts(establishment.Contacts);
+        return dto;
     }
 
     protected Dish DeserializeDish(DishDTO dto)
     {
-        if (dto is BeerDTO beerDTO)
+        return dto switch
         {
-            return new Beer(
-                beerDTO.Id,
-                beerDTO.Name,
-                beerDTO.Price,
-                beerDTO.Description,
-                beerDTO.IsAvailable,
-                beerDTO.Volume,
-                beerDTO.IsCold,
-                beerDTO.HasSugar,
-                beerDTO.Calories,
-                beerDTO.AlcoholPercent,
-                beerDTO.IsDraft
-                );
-        }
-
-        if (dto is DrinkDTO drinkDTO)
-        {
-            return new Drink(
-                drinkDTO.Id,
-                drinkDTO.Name, 
-                drinkDTO.Price,
-                drinkDTO.Description, 
-                drinkDTO.IsAvailable,
-                drinkDTO.Volume, 
-                drinkDTO.IsCold, 
-                drinkDTO.HasSugar, 
-                drinkDTO.Calories
-                );
-        }
-
-        if (dto is TeaDTO teaDTO)
-        {
-            return new Tea( 
-                teaDTO.Id,
-                teaDTO.Name,
-                teaDTO.Price,
-                teaDTO.Description,
-                teaDTO.IsAvailable,
-                teaDTO.Volume,
-                teaDTO.IsHot,
-                teaDTO.HasCaffeine,
-                teaDTO.Calories
-                );
-        }
-
-        if (dto is CoffeeDTO coffeeDTO)
-        {
-            return new Coffee(
-                coffeeDTO.Id,
-                coffeeDTO.Name,
-                coffeeDTO.Price,
-                coffeeDTO.Description,
-                coffeeDTO.IsAvailable,
-                coffeeDTO.Volume,
-                coffeeDTO.IsHot,
-                coffeeDTO.HasMilk,
-                coffeeDTO.CaffeineLevel,
-                coffeeDTO.Calories
-                );
-        }
-
-        if (dto is CocktailDTO cocktailDTO)
-        {
-            return new Cocktail(
-                cocktailDTO.Id,
-                cocktailDTO.Name,
-                cocktailDTO.Price,
-                cocktailDTO.Description,
-                cocktailDTO.IsAvailable,
-                cocktailDTO.Volume,
-                cocktailDTO.Calories,
-                cocktailDTO.IsAlcoholic,
-                cocktailDTO.IsCold
-                );
-        }
-
-        if (dto is AppetizerDTO appetizerDTO)
-        {
-            return new Appetizer(
-                appetizerDTO.Id,
-                appetizerDTO.Name,
-                appetizerDTO.Price,
-                appetizerDTO.Description,
-                appetizerDTO.IsAvailable,
-                appetizerDTO.Weight,
-                appetizerDTO.IsHot,
-                appetizerDTO.SpiceLevel,
-                appetizerDTO.IsVegan
-                );
-        }
-
-        if (dto is BakeryDTO bakeryDTO)
-        {
-            return new Bakery(
-                bakeryDTO.Id,
-                bakeryDTO.Name,
-                bakeryDTO.Price,
-                bakeryDTO.Description,
-                bakeryDTO.IsAvailable,
-                bakeryDTO.Weight,
-                bakeryDTO.Calories,
-                bakeryDTO.IsSweet,
-                bakeryDTO.IsFresh,
-                bakeryDTO.IsVegan
-                );
-        }
-
-        if (dto is BreakfastDTO breakfastDTO)
-        {
-            return new Breakfast(
-                breakfastDTO.Id,
-                breakfastDTO.Name,
-                breakfastDTO.Price,
-                breakfastDTO.Description,
-                breakfastDTO.IsAvailable,
-                breakfastDTO.Weight,
-                breakfastDTO.Calories,
-                breakfastDTO.IncludesDrink,
-                breakfastDTO.IsVegan
-                );
-        }
-
-        if (dto is DessertDTO dessertDTO)
-        {
-            return new Dessert(
-                dessertDTO.Id,
-                dessertDTO.Name,
-                dessertDTO.Price,
-                dessertDTO.Description,
-                dessertDTO.IsAvailable,
-                dessertDTO.Calories,
-                dessertDTO.Weight,
-                dessertDTO.IsFrozen,
-                dessertDTO.IsVegan
-                );
-        }
-
-        if (dto is MainCourseDTO mainCourseDTO)
-        {
-            return new MainCourse(
-                mainCourseDTO.Id,
-                mainCourseDTO.Name,
-                mainCourseDTO.Price,
-                mainCourseDTO.Description,
-                mainCourseDTO.IsAvailable,
-                mainCourseDTO.Weight,
-                mainCourseDTO.SpiceLevel,
-                mainCourseDTO.IsVegan,
-                mainCourseDTO.Calories
-                );
-        }
-
-        if (dto is SaladDTO saladDTO)
-        {
-            return new Salad(
-                saladDTO.Id,
-                saladDTO.Name,
-                saladDTO.Price,
-                saladDTO.Description,
-                saladDTO.IsAvailable,
-                saladDTO.Weight,
-                saladDTO.IsVegan,
-                saladDTO.HasSeafood,
-                saladDTO.Calories
-                );
-        }
-
-        if (dto is SideDishDTO sideDishDTO)
-        {
-            return new SideDish(
-                sideDishDTO.Id,
-                sideDishDTO.Name,
-                sideDishDTO.Price,
-                sideDishDTO.Description,
-                sideDishDTO.IsAvailable,
-                sideDishDTO.Weight,
-                sideDishDTO.Calories,
-                sideDishDTO.IsVegan,
-                sideDishDTO.IsGlutenFree
-                );
-        }
-
-        if (dto is SoupDTO soupDTO)
-        {
-            return new Soup(
-                soupDTO.Id,
-                soupDTO.Name,
-                soupDTO.Price,
-                soupDTO.Description,
-                soupDTO.IsAvailable,
-                soupDTO.Volume,
-                soupDTO.IsHot,
-                soupDTO.IsVegan,
-                soupDTO.SpiceLevel
-                );
-        }
-
-        throw new Exception("Unknown dishDTO type");
+            BeerDTO d => new Beer(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Volume, d.IsCold, d.HasSugar, d.Calories, d.AlcoholPercent, d.IsDraft),
+            DrinkDTO d => new Drink(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Volume, d.IsCold, d.HasSugar, d.Calories),
+            TeaDTO d => new Tea(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Volume, d.IsHot, d.HasCaffeine, d.Calories),
+            CoffeeDTO d => new Coffee(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Volume, d.IsHot, d.HasMilk, d.CaffeineLevel, d.Calories),
+            CocktailDTO d => new Cocktail(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Volume, d.Calories, d.IsAlcoholic, d.IsCold),
+            AppetizerDTO d => new Appetizer(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Weight, d.IsHot, d.SpiceLevel, d.IsVegan),
+            BakeryDTO d => new Bakery(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Weight, d.Calories, d.IsSweet, d.IsFresh, d.IsVegan),
+            BreakfastDTO d => new Breakfast(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Weight, d.Calories, d.IncludesDrink, d.IsVegan),
+            DessertDTO d => new Dessert(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Calories, d.Weight, d.IsFrozen, d.IsVegan),
+            MainCourseDTO d => new MainCourse(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Weight, d.SpiceLevel, d.IsVegan, d.Calories),
+            SaladDTO d => new Salad(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Weight, d.IsVegan, d.HasSeafood, d.Calories),
+            SideDishDTO d => new SideDish(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Weight, d.Calories, d.IsVegan, d.IsGlutenFree),
+            SoupDTO d => new Soup(d.Id, d.Name, d.Price, d.Description, d.IsAvailable,
+                d.Volume, d.IsHot, d.IsVegan, d.SpiceLevel),
+            _ => throw new NotSupportedException($"Неизвестный тип DTO блюда: {dto.GetType().Name}.")
+        };
     }
-    
+
     protected Menu DeserializeMenu(MenuDTO dto)
     {
-        List<Dish> dishes = new();
-        foreach (DishDTO dishDto in dto.Dishes)
-        {
-            Dish dish = DeserializeDish(dishDto);
-            dishes.Add(dish);
-        }
+        List<Dish> dishes = dto.Dishes.Select(DeserializeDish).ToList();
 
         if (!string.IsNullOrWhiteSpace(dto.Season))
         {
-            SeasonalMenu seasonalMenu = new SeasonalMenu(dto.Name, dto.Description, dto.Season);
+            SeasonalMenu seasonalMenu = new(dto.Name, dto.Description, dto.Season);
             foreach (Dish dish in dishes) { seasonalMenu.AddDish(dish); }
             return seasonalMenu;
         }
 
-        Menu menu = new Menu(dto.Name, dto.Description);
+        Menu menu = new(dto.Name, dto.Description);
         foreach (Dish dish in dishes) { menu.AddDish(dish); }
         return menu;
     }
-    
+
     protected Establishment DeserializeEstablishment(EstablishmentDTO dto)
     {
         Menu menu = DeserializeMenu(dto.Menu);
-        SeasonalMenu? seasonalMenu = null;
-        if (dto.HasSeasonalMenu) 
-        { 
-            seasonalMenu = (SeasonalMenu)DeserializeMenu(dto.SeasonalMenu);
-        }
+        SeasonalMenu? seasonalMenu = dto.HasSeasonalMenu
+            ? (SeasonalMenu)DeserializeMenu(dto.SeasonalMenu)
+            : null;
 
-        if (dto is RestaurantDTO restaurantDTO)
+        Establishment establishment = dto switch
         {
-            Restaurant restaurant = new Restaurant(
-                restaurantDTO.Id,
-                restaurantDTO.Name, 
-                restaurantDTO.Address, 
-                restaurantDTO.Description, 
-                restaurantDTO.IsOpen,
-                menu,
-                restaurantDTO.Rating,
-                restaurantDTO.CuisineType, 
-                restaurantDTO.HasMichelinStar,
-                restaurantDTO.AverageCheck,
-                restaurantDTO.HasDelivery
-                );
+            RestaurantDTO d => new Restaurant(d.Id, d.Name, d.Address, d.Description, d.IsOpen,
+                menu, d.Rating, d.CuisineType, d.HasMichelinStar, d.AverageCheck, d.HasDelivery),
+            CafeDTO d => new Cafe(d.Id, d.Name, d.Address, d.Description, d.IsOpen,
+                menu, d.Rating, d.HasBusinessLunch, d.AverageCheck, d.HasDelivery, d.HasOutdoorSeating),
+            CoffeeShopDTO d => new CoffeeShop(d.Id, d.Name, d.Address, d.Description, d.IsOpen,
+                menu, d.Rating, d.HasAlternativeMilk, d.HasBakery, d.AverageCoffeePrice, d.HasWifi),
+            _ => throw new NotSupportedException($"Неизвестный тип DTO заведения: {dto.GetType().Name}.")
+        };
 
-            restaurant.ChangeContacts(DeserializeContacts(restaurantDTO.Contacts));
-            if (seasonalMenu != null) { restaurant.AddSeasonalMenu(seasonalMenu); }
-            return restaurant;
-        }
-
-        if (dto is CafeDTO cafeDTO)
-        {
-
-            Cafe cafe = new Cafe(
-                cafeDTO.Id,
-                cafeDTO.Name,
-                cafeDTO.Address,
-                cafeDTO.Description,
-                cafeDTO.IsOpen,
-                menu,
-                cafeDTO.Rating,
-                cafeDTO.HasBusinessLunch,
-                cafeDTO.AverageCheck,
-                cafeDTO.HasDelivery,
-                cafeDTO.HasOutdoorSeating
-                );
-            
-            cafe.ChangeContacts(DeserializeContacts(cafeDTO.Contacts));
-            if (seasonalMenu != null) { cafe.AddSeasonalMenu(seasonalMenu); }
-            return cafe;
-        }
-
-        if (dto is CoffeeShopDTO coffeeShopDTO)
-        {
-            CoffeeShop coffeeShop = new CoffeeShop(
-                coffeeShopDTO.Id,
-                coffeeShopDTO.Name,
-                coffeeShopDTO.Address,
-                coffeeShopDTO.Description,
-                coffeeShopDTO.IsOpen,
-                menu,
-                coffeeShopDTO.Rating,
-                coffeeShopDTO.HasAlternativeMilk,
-                coffeeShopDTO.HasBakery,
-                coffeeShopDTO.AverageCoffeePrice,
-                coffeeShopDTO.HasWifi
-                );
-            
-            coffeeShop.ChangeContacts(DeserializeContacts(coffeeShopDTO.Contacts));
-            if (seasonalMenu != null) { coffeeShop.AddSeasonalMenu(seasonalMenu); }
-            return coffeeShop;
-        }
-
-        throw new Exception("Unknown establishmentDTO type");
+        establishment.ChangeContacts(DeserializeContacts(dto.Contacts));
+        if (seasonalMenu != null) { establishment.AddSeasonalMenu(seasonalMenu); }
+        return establishment;
     }
 }

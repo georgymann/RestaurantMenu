@@ -1,0 +1,106 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="using:RestaurantMenu"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="560"
+        d:DesignHeight="640"
+        x:Class="RestaurantMenu.EstablishmentInfoWindow"
+        Title="О заведении"
+        Width="560"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+        <Style Selector="Border.info-card">
+            <Setter Property="Background" Value="#0F1923"/>
+            <Setter Property="BorderBrush" Value="#1C2631"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="16,13"/>
+        </Style>
+        <Style Selector="Border.badge">
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="11,6"/>
+        </Style>
+        <Style Selector="TextBlock.link">
+            <Setter Property="Foreground" Value="#F3C66D"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="TextBlock.link:pointerover">
+            <Setter Property="Foreground" Value="#FFD17A"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Background="#08111A" Padding="32">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="24">
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="14" VerticalAlignment="Center">
+                        <Viewbox Width="40" Height="30" VerticalAlignment="Center">
+                            <Canvas Width="120" Height="84">
+                                <Ellipse Canvas.Left="53" Canvas.Top="8" Width="14" Height="14"
+                                         Stroke="#F3C66D" StrokeThickness="4" Fill="Transparent"/>
+                                <Path Data="M60,22 L60,30" Stroke="#F3C66D" StrokeThickness="4" StrokeLineCap="Round"/>
+                                <Path Data="M22,60 C24,36 41,26 60,26 C79,26 96,36 98,60"
+                                      Stroke="#F3C66D" StrokeThickness="5" StrokeLineCap="Round" Fill="Transparent"/>
+                                <Path Data="M14,69 L106,69" Stroke="#F3C66D" StrokeThickness="5" StrokeLineCap="Round"/>
+                                <Path Data="M20,76 L100,76" Stroke="#F3C66D" StrokeThickness="3" StrokeLineCap="Round"/>
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Text="О ЗАВЕДЕНИИ" FontSize="12" FontWeight="SemiBold"
+                                   LetterSpacing="0.6" Foreground="#8B8FA8" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="NameTextBlock" Text=""
+                               FontSize="30" FontWeight="Bold" Foreground="#FFFFFF" TextWrapping="Wrap"/>
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Border Classes="badge" Background="#3A2F18" BorderBrush="#6E5824" BorderThickness="1">
+                            <TextBlock x:Name="TypeTextBlock" Text="" Foreground="#F3C66D"
+                                       FontSize="13" FontWeight="SemiBold"/>
+                        </Border>
+                        <Border Classes="badge" Background="#13202C" BorderBrush="#1C2631" BorderThickness="1">
+                            <StackPanel Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+                                <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="#22C55E" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="StatusTextBlock" Text="" Foreground="#CBD5E1" FontSize="13"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Classes="badge" Background="#13202C" BorderBrush="#1C2631" BorderThickness="1">
+                            <TextBlock x:Name="RatingTextBlock" Text="" Foreground="#CBD5E1" FontSize="13"/>
+                        </Border>
+                    </StackPanel>
+
+                    <TextBlock x:Name="DescriptionTextBlock" Text=""
+                               FontSize="15" Foreground="#9AA6B5" TextWrapping="Wrap"
+                               LineHeight="23" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <ItemsControl x:Name="FieldsList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:InfoField">
+                            <Border Classes="info-card" Margin="0,0,12,12">
+                                <StackPanel Spacing="11">
+                                    <TextBlock Text="{Binding Label}" Foreground="#8B8FA8"
+                                               FontSize="11" FontWeight="SemiBold" LetterSpacing="0.5"/>
+                                    <TextBlock Text="{Binding Value}" Foreground="#FFFFFF"
+                                               FontSize="15" TextWrapping="Wrap"
+                                               Classes.link="{Binding IsLink}"
+                                               PointerPressed="OpenLink"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</Window>

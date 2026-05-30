@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 using Model.Core.Abstract;
 using Model.Core.Establishments;
 using Model.Core.Interfaces;
@@ -46,13 +47,13 @@ public partial class MainWindow : Window
 
             if (_establishments.Count == 0)
             {
-                SelectedEstablishmentInfoText.Text = "Файлы заведений не найдены.";
+                EmptyHintText.Text = "Файлы заведений не найдены.";
             }
         }
         catch (Exception ex)
         {
             _establishments.Clear();
-            SelectedEstablishmentInfoText.Text = $"Ошибка чтения файлов: {ex.Message}";
+            EmptyHintText.Text = $"Ошибка чтения файлов: {ex.Message}";
         }
 
         EstablishmentComboBox.ItemsSource = _establishments;
@@ -152,10 +153,15 @@ public partial class MainWindow : Window
         }
 
         EstablishmentComboBox.SelectedIndex = -1;
-        SelectedEstablishmentText.Text = "Заведение пока не выбрано";
-        SelectedEstablishmentInfoText.Text = "Выберите заведение из списка слева.";
+        ShowEmptyState();
         MenuTypeComboBox.IsEnabled = false;
         ShowMenuButton.IsEnabled = false;
+    }
+
+    private void ShowEmptyState()
+    {
+        DetailsPanel.IsVisible = false;
+        EmptyStatePanel.IsVisible = true;
     }
 
     private void SelectEstablishment(object? sender, SelectionChangedEventArgs e)
@@ -164,15 +170,25 @@ public partial class MainWindow : Window
 
         if (establishment == null)
         {
-            SelectedEstablishmentText.Text = "Заведение пока не выбрано";
-            SelectedEstablishmentInfoText.Text = "Выберите заведение из списка слева.";
+            ShowEmptyState();
             MenuTypeComboBox.IsEnabled = false;
             ShowMenuButton.IsEnabled = false;
             return;
         }
 
-        SelectedEstablishmentText.Text = establishment.Name;
-        SelectedEstablishmentInfoText.Text = establishment.GetInfo();
+        EstablishmentView view = new(establishment);
+        DetailsNameText.Text = view.Name;
+        DetailsTypeText.Text = view.Type;
+        DetailsStatusText.Text = view.Status;
+        DetailsStatusDot.Fill = view.IsOpen
+            ? Avalonia.Media.Brushes.LimeGreen
+            : Avalonia.Media.Brushes.IndianRed;
+        DetailsRatingText.Text = view.Rating;
+        DetailsDescriptionText.Text = view.Description;
+        DetailsFieldsList.ItemsSource = view.Fields;
+
+        EmptyStatePanel.IsVisible = false;
+        DetailsPanel.IsVisible = true;
 
         List<string> menuTypes = new List<string>();
         menuTypes.Add("Обычное меню");
@@ -201,12 +217,23 @@ public partial class MainWindow : Window
         {
             SaveEstablishments(selectedFormat);
             _currentFormat = selectedFormat;
-            SelectedEstablishmentInfoText.Text = $"Данные сохранены в формате {_currentFormat}.";
+            ShowStatus($"Данные сохранены в формате {_currentFormat}.");
         }
         catch (Exception ex)
         {
-            SelectedEstablishmentInfoText.Text = $"Ошибка сохранения: {ex.Message}";
+            ShowStatus($"Ошибка сохранения: {ex.Message}");
         }
+    }
+
+    private void ShowStatus(string message)
+    {
+        StatusText.Text = message;
+        StatusText.IsVisible = true;
+    }
+
+    private void OpenLink(object? sender, PointerPressedEventArgs e)
+    {
+        LinkOpener.Open(sender);
     }
 
     private void OpenMenu(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

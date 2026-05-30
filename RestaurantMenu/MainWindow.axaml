@@ -1,110 +1,276 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="using:RestaurantMenu"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        d:DesignWidth="900"
-        d:DesignHeight="600"
+        d:DesignWidth="1280"
+        d:DesignHeight="760"
         x:Class="RestaurantMenu.MainWindow"
-        Title="RestaurantMenu"
-        Width="900"
-        Height="600"
-        MinWidth="800"
-        MinHeight="540">
+        Title="Restaurant Menu"
+        Width="1280"
+        Height="760"
+        MinWidth="900"
+        MinHeight="600"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen">
 
-    <Grid RowDefinitions="Auto,*"
-          Background="#F4F5F7">
+    <Window.Styles>
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="Foreground" Value="#8B8FA8"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="LetterSpacing" Value="0.6"/>
+        </Style>
 
+        <Style Selector="ComboBox.app-combo">
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="#0E1722"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#28323F"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="ComboBox.app-combo:disabled">
+            <Setter Property="Opacity" Value="0.45"/>
+        </Style>
+        <Style Selector="ComboBox.app-combo /template/ TextBlock#PlaceholderTextBlock">
+            <Setter Property="Foreground" Value="#AEB6C4"/>
+        </Style>
+
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Foreground" Value="#E5E9F0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1C2631"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style Selector="ComboBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="#3A2F18"/>
+            <Setter Property="Foreground" Value="#F3C66D"/>
+        </Style>
+
+        <Style Selector="Button.primary-button">
+            <Setter Property="Background" Value="#F5C05E"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="BorderBrush" Value="#F5C05E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.primary-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#FFD17A"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="BorderBrush" Value="#FFD17A"/>
+        </Style>
+        <Style Selector="Button.primary-button:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+
+        <Style Selector="Border.info-card">
+            <Setter Property="Background" Value="#0F1923"/>
+            <Setter Property="BorderBrush" Value="#1C2631"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="16,13"/>
+        </Style>
+        <Style Selector="Border.badge">
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="11,6"/>
+        </Style>
+        <Style Selector="TextBlock.link">
+            <Setter Property="Foreground" Value="#F3C66D"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="TextBlock.link:pointerover">
+            <Setter Property="Foreground" Value="#FFD17A"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*" Background="#08111A">
+
+        <!-- Top bar -->
         <Border Grid.Row="0"
-                Background="White"
-                BorderBrush="#D9DDE3"
+                Background="#0E1722"
+                BorderBrush="#16212E"
                 BorderThickness="0,0,0,1"
-                Padding="28,22">
-
-            <TextBlock Text="Restaurant Menu"
-                       FontSize="26"
-                       FontWeight="SemiBold"
-                       Foreground="#18212F"/>
+                Padding="32,18">
+            <StackPanel Orientation="Horizontal" Spacing="14" VerticalAlignment="Center">
+                <Viewbox Width="34" Height="26" VerticalAlignment="Center">
+                    <Canvas Width="120" Height="84">
+                        <Ellipse Canvas.Left="53" Canvas.Top="8" Width="14" Height="14"
+                                 Stroke="#F3C66D" StrokeThickness="4" Fill="Transparent"/>
+                        <Path Data="M60,22 L60,30" Stroke="#F3C66D" StrokeThickness="4" StrokeLineCap="Round"/>
+                        <Path Data="M22,60 C24,36 41,26 60,26 C79,26 96,36 98,60"
+                              Stroke="#F3C66D" StrokeThickness="5" StrokeLineCap="Round" Fill="Transparent"/>
+                        <Path Data="M14,69 L106,69" Stroke="#F3C66D" StrokeThickness="5" StrokeLineCap="Round"/>
+                        <Path Data="M20,76 L100,76" Stroke="#F3C66D" StrokeThickness="3" StrokeLineCap="Round"/>
+                    </Canvas>
+                </Viewbox>
+                <TextBlock Text="Restaurant Menu" FontSize="22" FontWeight="Bold"
+                           Foreground="#FFFFFF" VerticalAlignment="Center"/>
+            </StackPanel>
         </Border>
 
-        <Grid Grid.Row="1"
-              ColumnDefinitions="360,*"
-              Margin="28">
+        <!-- Body -->
+        <Grid Grid.Row="1" ColumnDefinitions="400,*" Margin="32,28,32,32">
 
+            <!-- Selection card -->
             <Border Grid.Column="0"
-                    Width="360"
-                    HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Background="White"
-                    BorderBrush="#D9DDE3"
+                    Background="#0F1923"
+                    BorderBrush="#1C2631"
                     BorderThickness="1"
-                    CornerRadius="6"
-                    Padding="22">
-
-                <StackPanel Spacing="18">
-
-                    <StackPanel Spacing="7">
-                        <TextBlock Text="Тип заведения"
-                                   FontWeight="SemiBold"/>
-                        <ComboBox x:Name="EstablishmentTypeComboBox"
-                                  PlaceholderText="Все заведения"
-                                  SelectionChanged="FilterEstablishments"/>
+                    CornerRadius="14"
+                    Padding="26">
+                <StackPanel Spacing="20">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Загрузка меню" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF"/>
+                        <TextBlock Text="Выберите заведение и откройте его меню"
+                                   FontSize="13" Foreground="#8B8FA8" TextWrapping="Wrap"/>
                     </StackPanel>
 
-                    <StackPanel Spacing="7">
-                        <TextBlock Text="Заведение"
-                                   FontWeight="SemiBold"/>
-                        <ComboBox x:Name="EstablishmentComboBox"
-                                  PlaceholderText="Выберите заведение"
-                                  SelectionChanged="SelectEstablishment"/>
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="ТИП ЗАВЕДЕНИЯ"/>
+                        <ComboBox x:Name="EstablishmentTypeComboBox" Classes="app-combo"
+                                  PlaceholderText="Все заведения" SelectionChanged="FilterEstablishments"/>
                     </StackPanel>
 
-                    <StackPanel Spacing="7">
-                        <TextBlock Text="Вид меню"
-                                   FontWeight="SemiBold"/>
-                        <ComboBox x:Name="MenuTypeComboBox"
-                                  IsEnabled="False"
-                                  PlaceholderText="Выберите меню"/>
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="ЗАВЕДЕНИЕ"/>
+                        <ComboBox x:Name="EstablishmentComboBox" Classes="app-combo"
+                                  PlaceholderText="Выберите заведение" SelectionChanged="SelectEstablishment"/>
                     </StackPanel>
 
-                    <StackPanel Spacing="7">
-                        <TextBlock Text="Формат файлов"
-                                   FontWeight="SemiBold"/>
-                        <ComboBox x:Name="FormatComboBox"
-                                  PlaceholderText="Выберите формат cохранения"
-                                  SelectionChanged="ChangeFormat"/>
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="ВИД МЕНЮ"/>
+                        <ComboBox x:Name="MenuTypeComboBox" Classes="app-combo"
+                                  IsEnabled="False" PlaceholderText="Выберите меню"/>
                     </StackPanel>
 
-                    <Button x:Name="ShowMenuButton"
-                            Content="Показать меню"
-                            Height="42"
-                            HorizontalContentAlignment="Center"
-                            IsEnabled="False"
-                            Click="OpenMenu"/>
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="ФОРМАТ ФАЙЛОВ"/>
+                        <ComboBox x:Name="FormatComboBox" Classes="app-combo"
+                                  PlaceholderText="Выберите формат сохранения" SelectionChanged="ChangeFormat"/>
+                    </StackPanel>
+
+                    <Button x:Name="ShowMenuButton" Classes="primary-button"
+                            Content="Показать меню" Height="46"
+                            HorizontalAlignment="Stretch" Margin="0,4,0,0"
+                            IsEnabled="False" Click="OpenMenu"/>
+
+                    <TextBlock x:Name="StatusText" Text=""
+                               FontSize="12" Foreground="#8B8FA8" TextWrapping="Wrap"
+                               IsVisible="False"/>
                 </StackPanel>
             </Border>
 
-            <StackPanel Grid.Column="1"
-                        Margin="42,22,0,0"
-                        Spacing="12">
+            <!-- Selected establishment -->
+            <Border Grid.Column="1"
+                    Margin="28,0,0,0"
+                    Background="#0B141D"
+                    BorderBrush="#16212E"
+                    BorderThickness="1"
+                    CornerRadius="14"
+                    Padding="40">
+                <Grid>
 
-                <TextBlock Text="Выбранное заведение"
-                           FontSize="14"
-                           Foreground="#667085"/>
+                    <!-- Empty state -->
+                    <StackPanel x:Name="EmptyStatePanel"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Spacing="18" MaxWidth="420">
+                        <Viewbox Width="80" Height="58" HorizontalAlignment="Center" Opacity="0.5">
+                            <Canvas Width="120" Height="84">
+                                <Ellipse Canvas.Left="53" Canvas.Top="8" Width="14" Height="14"
+                                         Stroke="#3F4D5C" StrokeThickness="4" Fill="Transparent"/>
+                                <Path Data="M60,22 L60,30" Stroke="#3F4D5C" StrokeThickness="4" StrokeLineCap="Round"/>
+                                <Path Data="M22,60 C24,36 41,26 60,26 C79,26 96,36 98,60"
+                                      Stroke="#3F4D5C" StrokeThickness="5" StrokeLineCap="Round" Fill="Transparent"/>
+                                <Path Data="M14,69 L106,69" Stroke="#3F4D5C" StrokeThickness="5" StrokeLineCap="Round"/>
+                                <Path Data="M20,76 L100,76" Stroke="#3F4D5C" StrokeThickness="3" StrokeLineCap="Round"/>
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Text="Заведение пока не выбрано"
+                                   FontSize="22" FontWeight="SemiBold" Foreground="#E5E9F0"
+                                   TextAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="EmptyHintText"
+                                   Text="Выберите заведение из списка слева, чтобы увидеть подробную информацию и открыть меню."
+                                   FontSize="14" Foreground="#8B95A6" TextWrapping="Wrap"
+                                   TextAlignment="Center" HorizontalAlignment="Center" LineHeight="22"/>
+                    </StackPanel>
 
-                <TextBlock x:Name="SelectedEstablishmentText"
-                           Text="Заведение пока не выбрано"
-                           FontSize="24"
-                           FontWeight="SemiBold"
-                           Foreground="#18212F"/>
+                    <!-- Details -->
+                    <ScrollViewer x:Name="DetailsPanel" IsVisible="False"
+                                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Spacing="24">
+                            <StackPanel Spacing="12">
+                                <TextBlock Text="ВЫБРАННОЕ ЗАВЕДЕНИЕ" FontSize="12" FontWeight="SemiBold"
+                                           LetterSpacing="0.6" Foreground="#8B8FA8"/>
+                                <TextBlock x:Name="DetailsNameText" Text=""
+                                           FontSize="32" FontWeight="Bold" Foreground="#FFFFFF" TextWrapping="Wrap"/>
 
-                <TextBlock x:Name="SelectedEstablishmentInfoText"
-                           Text="Выберите заведение из списка слева."
-                           FontSize="14"
-                           TextWrapping="Wrap"
-                           Foreground="#667085"/>
-            </StackPanel>
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <Border Classes="badge" Background="#3A2F18" BorderBrush="#6E5824" BorderThickness="1">
+                                        <TextBlock x:Name="DetailsTypeText" Text="" Foreground="#F3C66D"
+                                                   FontSize="13" FontWeight="SemiBold"/>
+                                    </Border>
+                                    <Border Classes="badge" Background="#13202C" BorderBrush="#1C2631" BorderThickness="1">
+                                        <StackPanel Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+                                            <Ellipse x:Name="DetailsStatusDot" Width="8" Height="8"
+                                                     Fill="#22C55E" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="DetailsStatusText" Text="" Foreground="#CBD5E1" FontSize="13"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Classes="badge" Background="#13202C" BorderBrush="#1C2631" BorderThickness="1">
+                                        <TextBlock x:Name="DetailsRatingText" Text="" Foreground="#CBD5E1" FontSize="13"/>
+                                    </Border>
+                                </StackPanel>
 
+                                <TextBlock x:Name="DetailsDescriptionText" Text=""
+                                           FontSize="15" Foreground="#9AA6B5" TextWrapping="Wrap"
+                                           LineHeight="23" Margin="0,4,0,0"/>
+                            </StackPanel>
+
+                            <ItemsControl x:Name="DetailsFieldsList">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="2"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="local:InfoField">
+                                        <Border Classes="info-card" Margin="0,0,12,12">
+                                            <StackPanel Spacing="11">
+                                                <TextBlock Text="{Binding Label}" Foreground="#8B8FA8"
+                                                           FontSize="11" FontWeight="SemiBold" LetterSpacing="0.5"/>
+                                                <TextBlock Text="{Binding Value}" Foreground="#FFFFFF"
+                                                           FontSize="15" TextWrapping="Wrap"
+                                                           Classes.link="{Binding IsLink}"
+                                                           PointerPressed="OpenLink"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>

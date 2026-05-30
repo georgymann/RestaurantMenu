@@ -1,0 +1,175 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="using:RestaurantMenu"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="520"
+        d:DesignHeight="680"
+        x:Class="RestaurantMenu.AddDishWindow"
+        Title="Добавление блюда"
+        Width="520"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Styles>
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="Foreground" Value="#8B8FA8"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="LetterSpacing" Value="0.5"/>
+        </Style>
+        <Style Selector="TextBox.editor-input">
+            <Setter Property="Background" Value="#0E1722"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#28323F"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style Selector="ComboBox.editor-input">
+            <Setter Property="Background" Value="#0E1722"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#28323F"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MinHeight" Value="0"/>
+        </Style>
+        <Style Selector="CheckBox.editor-check">
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+        </Style>
+        <Style Selector="Button.primary-button">
+            <Setter Property="Background" Value="#F5C05E"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="BorderBrush" Value="#F5C05E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.primary-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#FFD17A"/>
+            <Setter Property="BorderBrush" Value="#FFD17A"/>
+        </Style>
+        <Style Selector="Button.ghost-button">
+            <Setter Property="Background" Value="#1C2631"/>
+            <Setter Property="Foreground" Value="#CBD5E1"/>
+            <Setter Property="BorderBrush" Value="#2B3644"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.ghost-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#24303D"/>
+        </Style>
+        
+        <Style Selector="StackPanel.num-field">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Spacing" Value="8"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Background="#08111A" Padding="28">
+        <StackPanel Spacing="18">
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="ДОБАВЛЕНИЕ БЛЮДА" FontSize="12" FontWeight="SemiBold"
+                           LetterSpacing="0.6" Foreground="#8B8FA8"/>
+                <TextBlock x:Name="EstablishmentText" Text="" FontSize="22" FontWeight="Bold"
+                           Foreground="#FFFFFF"/>
+            </StackPanel>
+
+            <!-- Тип блюда -->
+            <StackPanel Spacing="8">
+                <TextBlock Classes="field-label" Text="ТИП БЛЮДА"/>
+                <ComboBox x:Name="TypeComboBox" Classes="editor-input"
+                          HorizontalAlignment="Stretch" SelectionChanged="ChangeType"/>
+            </StackPanel>
+
+            <!-- Название и цена -->
+            <Grid ColumnDefinitions="*,14,Auto">
+                <StackPanel Grid.Column="0" Spacing="8">
+                    <TextBlock Classes="field-label" Text="НАЗВАНИЕ"/>
+                    <TextBox x:Name="NameBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Spacing="8" Width="150">
+                    <TextBlock Classes="field-label" Text="ЦЕНА, ₽"/>
+                    <TextBox x:Name="PriceBox" Classes="editor-input"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Описание -->
+            <StackPanel Spacing="8">
+                <TextBlock Classes="field-label" Text="ОПИСАНИЕ"/>
+                <TextBox x:Name="DescriptionBox" Classes="editor-input"
+                         AcceptsReturn="True" TextWrapping="Wrap" MinHeight="80"/>
+            </StackPanel>
+
+            <!-- Числовые параметры, специфичные для типа -->
+            <WrapPanel x:Name="NumericPanel" ItemSpacing="14" LineSpacing="14">
+                <StackPanel x:Name="WeightPanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="ВЕС, Г"/>
+                    <TextBox x:Name="WeightBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel x:Name="VolumePanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="ОБЪЁМ, Л"/>
+                    <TextBox x:Name="VolumeBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel x:Name="VolumeMlPanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="ОБЪЁМ, МЛ"/>
+                    <TextBox x:Name="VolumeMlBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel x:Name="CaloriesPanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="КАЛОРИИ, ККАЛ"/>
+                    <TextBox x:Name="CaloriesBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel x:Name="SpicePanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="ОСТРОТА, 0-10"/>
+                    <TextBox x:Name="SpiceBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel x:Name="CaffeinePanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="КОФЕИН, 0-10"/>
+                    <TextBox x:Name="CaffeineBox" Classes="editor-input"/>
+                </StackPanel>
+                <StackPanel x:Name="AlcoholPanel" Classes="num-field">
+                    <TextBlock Classes="field-label" Text="АЛКОГОЛЬ, %"/>
+                    <TextBox x:Name="AlcoholBox" Classes="editor-input"/>
+                </StackPanel>
+            </WrapPanel>
+
+            <!-- Флаги, специфичные для типа -->
+            <WrapPanel x:Name="FlagsPanel" ItemSpacing="18" LineSpacing="8">
+                <CheckBox x:Name="IsHotCheck" Classes="editor-check" Content="Горячее"/>
+                <CheckBox x:Name="IsColdCheck" Classes="editor-check" Content="Холодный"/>
+                <CheckBox x:Name="IsVeganCheck" Classes="editor-check" Content="Веганское"/>
+                <CheckBox x:Name="HasSugarCheck" Classes="editor-check" Content="С сахаром"/>
+                <CheckBox x:Name="HasMilkCheck" Classes="editor-check" Content="С молоком"/>
+                <CheckBox x:Name="HasCaffeineCheck" Classes="editor-check" Content="С кофеином"/>
+                <CheckBox x:Name="HasSeafoodCheck" Classes="editor-check" Content="С морепродуктами"/>
+                <CheckBox x:Name="IsGlutenFreeCheck" Classes="editor-check" Content="Без глютена"/>
+                <CheckBox x:Name="IsFrozenCheck" Classes="editor-check" Content="Замороженный"/>
+                <CheckBox x:Name="IsAlcoholicCheck" Classes="editor-check" Content="Алкогольный"/>
+                <CheckBox x:Name="IsDraftCheck" Classes="editor-check" Content="Разливное"/>
+                <CheckBox x:Name="IsSweetCheck" Classes="editor-check" Content="Сладкая"/>
+                <CheckBox x:Name="IsFreshCheck" Classes="editor-check" Content="Свежая"/>
+                <CheckBox x:Name="IncludesDrinkCheck" Classes="editor-check" Content="С напитком"/>
+            </WrapPanel>
+
+            <TextBlock x:Name="ErrorText" Text="" Foreground="#F87171" FontSize="13"
+                       TextWrapping="Wrap" IsVisible="False"/>
+
+            <Grid ColumnDefinitions="*,12,*" Margin="0,6,0,0">
+                <Button Grid.Column="0" Classes="ghost-button" Content="Отмена"
+                        HorizontalAlignment="Stretch" Click="Cancel"/>
+                <Button Grid.Column="2" Classes="primary-button" Content="Добавить"
+                        HorizontalAlignment="Stretch" Click="Save"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>

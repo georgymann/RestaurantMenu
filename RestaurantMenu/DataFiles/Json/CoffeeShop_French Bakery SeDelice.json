@@ -6,11 +6,11 @@
   "Kind": "CoffeeShop",
   "Id": "92541e8b-091c-9cba-91f6-6799f7e4cfcd",
   "Name": "French Bakery SeDelice",
-  "Address": "Сеть кофеен French Bakery SeDelice",
+  "Address": "г. Москва, ул. Большая Якиманка, 52",
   "Description": "Сеть кофеен с классическими кофейными напитками, сезонным весенним меню, ароматной выпечкой.",
   "Rating": 4.8,
   "IsOpen": true,
-  "HasSeasonalMenu": true,
+  "HasSeasonalMenu": false,
   "Contacts": {
     "Phone": "+7 (905) 782-66-38",
     "Website": "sedelice.ru"
@@ -355,11 +355,5 @@
         "IsAvailable": true
       }
     ]
-  },
-  "SeasonalMenu": {
-    "Name": "Весеннее меню",
-    "Description": "Сезонное весеннее меню кофейни French Bakery SeDelice",
-    "Season": "Весна",
-    "Dishes": []
   }
 }
